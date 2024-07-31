@@ -14,7 +14,7 @@ app.use('/api', usuariosRotas);
 app.use(require("cors")());
 
 const corsOptions = {
-  origin: 'http://localhost:3001',
+  origin: 'http://localhost:3000',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSucessStatus: 204

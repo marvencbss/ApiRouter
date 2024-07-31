@@ -6,13 +6,13 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'APIROUTER',
+      title: 'API_SUPER',
       version: '1.0.0',
       description: 'Uma aplicacao com as rotas usando Sequelize',
     },
     servers: [
       {
-        url: 'http://localhost:3001/api',
+        url: 'http://localhost:3000/api',
       },
     ],
   },
