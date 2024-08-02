@@ -19,7 +19,28 @@ const Usuario = database.define('usuario', {
     cidade:  {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    UF: {
+      type: Sequelize.STRING,
+      allowNull: false
     }
+    ,
+  cep: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  complemento: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  bairro: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  numero: {
+    type: Sequelize.INTEGER,
+    allowNull: true
+  }
     }, {
 
 
@@ -44,5 +65,4 @@ const Usuario = database.define('usuario', {
 })
 
 
- 
 module.exports = Usuario;

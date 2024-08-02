@@ -1,19 +1,24 @@
-
-//Importa o objeto usuario
 const Usuario = require('../modelo/Usuario');
-
-//Importar para acessar os operadores do Sequelize
 const { Op } = require('sequelize');
 
 
-// Criar um novo usuário
 exports.createusuario = async (req, res) => {
-  const { nome, idade, cidade } = req.body;
+  console.log('createusuario');
+  const { nome, idade, cidade, uf, cep, complemento, bairro, numero } = req.body;
+  console.log('Createusuario.Nome' +nome);
+  console.log('Createusuario.Idade' +idade);
+  console.log('Createusuario.Cidade' +cidade);
+  console.log('Createusuario.UF' +uf);
+  console.log('Createusuario.cep' +cep);
+  console.log('Createusuario.complemento' +complemento);
+  console.log('Createusuario.bairro' +bairro);
+  console.log('Createusuario.numero' +numero);
   try {
-    const novoUsuario = await Usuario.create({ nome, idade , cidade});
+    const novoUsuario = await Usuario.create({ nome, idade, cidade, uf})
     res.status(201).json(novoUsuario);
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao criar usuário' });
+    console.log("Erro ao criar o usuário.");
+    res.status(500).json({ error: 'Erro ao criar usuário' })
   }
 };
 
@@ -30,13 +35,18 @@ exports.getusuarios = async (req, res) => {
 // Atualizar um usuário
 exports.updateusuario = async (req, res) => {
   const { id } = req.params;
-  const { nome, idade, cidade } = req.body;
+  const { nome, idade, cidade, uf, cep, complemento, bairro, numero } = req.body;
   try {
     const usuario = await Usuario.findByPk(id);
     if (usuario) {
       usuario.nome = nome;
       usuario.idade = idade;
       usuario.cidade = cidade;
+      usuario.uf = uf;
+      usuario.cep = cep;
+      usuario.complemento = complemento;
+      usuario.bairro = bairro;
+      usuario.numero = numero;
       usuario.updatedAt = new Date();
       await usuario.save();
       res.status(200).json(usuario);
@@ -48,9 +58,6 @@ exports.updateusuario = async (req, res) => {
   }
 };
 
-
-
-// buscar por ID do usuário
 exports.buscarId = async (req, res) => {
   const { id } = req.params;
   try {
@@ -66,8 +73,6 @@ exports.buscarId = async (req, res) => {
   }
 };
 
-
-// buscar por nome de usuário
 exports.buscarUsuarioPorNome = async (req, res) => {
   const {nome} = req.params;
   try {
@@ -83,7 +88,6 @@ exports.buscarUsuarioPorNome = async (req, res) => {
   }
 };
 
-// buscar por nome de cidade
 exports.buscarUsuarioPorCidade = async (req, res) => {
   const {cidade} = req.params;
   try {
@@ -99,7 +103,6 @@ exports.buscarUsuarioPorCidade = async (req, res) => {
   }
 };
 
-// Deletar um usuário
 exports.deleteusuario = async (req, res) => {
   const { id } = req.params;
   try {
