@@ -3,17 +3,18 @@ const { Op } = require('sequelize');
 
 exports.createusuario = async (req, res) => {
   console.log('createusuario');
-  const { nome, idade, cidade, uf ,cep, complemento, bairro, numero} = req.body;
-  console.log('Createusuario.Nome'+nome);
-  console.log('createusuario.Idade'+idade);
-  console.log('createusuario.Cidade'+cidade);
-  console.log('createusuario.UF'+uf);
-  console.log('createusuario.CEP'+cep);
-  console.log('createusuario.Complemento'+complemento);
-  console.log('createusuario.Bairro'+bairro);
-  console.log('createusuario.Numero'+numero);
+  const { nome, idade, cidade, uf ,cep, complemento, bairro, numero, logradouro} = req.body;
+  console.log('Createusuario.Nome'+ nome);
+  console.log('createusuario.Idade'+ idade);
+  console.log('createusuario.Cidade'+ cidade);
+  console.log('createusuario.UF'+ uf);
+  console.log('createusuario.CEP'+ cep);
+  console.log('createusuario.Complemento'+ complemento);
+  console.log('createusuario.Bairro'+ bairro);
+  console.log('createusuario.Numero'+ numero);
+  console.log('createusuario.Logradouro'+ logradouro);
   try {
-    const novoUsuario = await Usuario.create({ nome, idade , cidade, uf, cep, complemento, bairro, numero});
+    const novoUsuario = await Usuario.create({ nome, idade , cidade, uf, cep, complemento, bairro, numero, logradouro});
     res.status(201).json(novoUsuario);
   } catch (err) {
     console.log("Erro ao criar usuário");
@@ -32,7 +33,7 @@ exports.getusuarios = async (req, res) => {
 
 exports.updateusuario = async (req, res) => {
   const { id } = req.params;
-  const { nome, idade, cidade, uf, cep, complemento, bairro, numero  } = req.body;
+  const { nome, idade, cidade, uf, cep, complemento, bairro, numero, logradouro  } = req.body;
   console.log("updateusuario id:"+id+" - nome:"+nome+" - idade:"+idade+"- cidade:"+cidade+"- uf:"+uf+"- cep:"+cep+"- complemento:"+complemento+"- bairro:"+bairro+"- numero:"+numero);
   try {
     const usuario = await Usuario.findByPk(id);
@@ -45,6 +46,7 @@ exports.updateusuario = async (req, res) => {
       usuario.complemento = complemento;
       usuario.bairro = bairro;
       usuario.numero = numero;
+      usuario.logradouro = logradouro;
       usuario.updatedAt = new Date();
       await usuario.save();
       res.status(200).json(usuario);

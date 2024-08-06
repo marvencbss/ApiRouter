@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const usuarioController = require('../controller/usuarioController');
 
+//criar a rota criar usuario
 /**
  * @swagger
  * /usuarios:
@@ -89,32 +90,7 @@ router.get('/buscarId/:id', usuarioController.buscarId);
  */
 router.get('/buscarUsuarioPorNome/:nome', usuarioController.buscarUsuarioPorNome);
 
-//criar a rota buscar usuarios que vivem na cidade
-/**
- * @swagger
- * tags:
- *   name: Usuario
- *   description: Busca todos os usuários que vivem na cidade
- */
 
-/**
- * @swagger
- * /buscarUsuarioPorCidade/{cidade}:
- *   get:
- *     summary: Busca todos os usuários que vivem em 
- *     tags: [Usuario]
- *     parameters:
- *       - in: path
- *         name: cidade
- *         schema:
- *           type: string
- *         required: true
- *         description: Nome da cidade
- *     responses:
- *       200:
- *         description: Busca todos os usuários que moram em determinada cidade.
- */
-router.get('/buscarUsuarioPorCidade/:cidade', usuarioController.buscarUsuarioPorCidade);
 
 //criar a rota buscar usuarios
 /**

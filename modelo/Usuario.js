@@ -1,29 +1,30 @@
- const Sequelize = require('sequelize');
+
+const Sequelize = require('sequelize');
 const database = require('../data_base/db');
- 
+
 const Usuario = database.define('usuario', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
-    nome: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    idade: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
-    cidade:  {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    UF: {
-      type: Sequelize.STRING,
-      allowNull: false
-    },
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  nome: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  idade: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  cidade: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  uf: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   cep: {
     type: Sequelize.STRING,
     allowNull: true
@@ -39,26 +40,33 @@ const Usuario = database.define('usuario', {
   numero: {
     type: Sequelize.INTEGER,
     allowNull: true
+  },
+  logradouro: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
-    }, {
+}, {
 
-       timestamps: true,
-        hooks: {
-          beforeCreate: (usuario, options) => {
-            const now = new Date();
-            const threeHoursLater = new Date(now.getTime() - 3 * 60 * 60 * 1000);
-            usuario.createdAt = threeHoursLater;
-            usuario.updatedAt = threeHoursLater;
-          },
-          beforeUpdate: (usuario, options) => {
-            const now = new Date();
-            const threeHoursLater = new Date(now.getTime() - 3 * 60 * 60 * 1000);
-            usuario.updatedAt = threeHoursLater;
-            console.log(`Hook beforeUpdate chamado. updatedAt: ${usuario.updatedAt}`);
-          }
+
+
+  // Configurações do modelo
+  timestamps: true, // Habilita createdAt e updatedAt
+  hooks: {
+    beforeCreate: (usuario, options) => {
+      const now = new Date();
+      const threeHoursLater = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+      usuario.createdAt = threeHoursLater;
+      usuario.updatedAt = threeHoursLater;
+    },
+    beforeUpdate: (usuario, options) => {
+      const now = new Date();
+      const threeHoursLater = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+      usuario.updatedAt = threeHoursLater;
     }
-        
+  }
+
 })
+
 
 
 module.exports = Usuario;
