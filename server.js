@@ -4,7 +4,6 @@ const usuariosRotas = require('./rotas/usuarioRotas');
 const uploadArquivoRotas = require('./rotas/uploadArquivoRotas');
 
 const setupSwagger = require('./swagger');
-
 const cors = require('cors');
 
 

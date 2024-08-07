@@ -1,5 +1,4 @@
 const swaggerJsdoc = require('swagger-jsdoc');
-
 const swaggerUi = require('swagger-ui-express');
 
 const options = {
@@ -12,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3001',
+        url: 'http://localhost:3001/api_super',
       },
     ],
   },

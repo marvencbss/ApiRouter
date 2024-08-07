@@ -46,10 +46,7 @@ const Usuario = database.define('usuario', {
   }
 }, {
 
-
-
-  // Configurações do modelo
-  timestamps: true, // Habilita createdAt e updatedAt
+  timestamps: true,
   hooks: {
     beforeCreate: (usuario, options) => {
       const now = new Date();

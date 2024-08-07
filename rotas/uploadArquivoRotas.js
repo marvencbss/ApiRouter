@@ -1,5 +1,5 @@
 const express = require('express');
-const uploadarquivocontroller  = require('../controllers/uploadArquivosController');
+const uploadarquivocontroller  = require('../controller/uploadArquivosController');
 const upload = require('../Multer/multer');
 const router = express.Router();
 
