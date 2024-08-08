@@ -1,9 +1,11 @@
 const Usuario = require('../modelo/Usuario');
 const { Op } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 exports.createusuario = async (req, res) => {
   console.log('createusuario');
-  const { nome, idade, cidade, uf ,cep, complemento, bairro, numero, logradouro} = req.body;
+  const { nome, idade, cidade, uf ,cep, complemento, bairro, numero, logradouro, email, senha} = req.body;
   console.log('Createusuario.Nome'+ nome);
   console.log('createusuario.Idade'+ idade);
   console.log('createusuario.Cidade'+ cidade);
@@ -13,8 +15,12 @@ exports.createusuario = async (req, res) => {
   console.log('createusuario.Bairro'+ bairro);
   console.log('createusuario.Numero'+ numero);
   console.log('createusuario.Logradouro'+ logradouro);
+  console.log('createusuario.Email'+ email);
+
+const hashedPassword = getHashedPassword(senha);
+
   try {
-    const novoUsuario = await Usuario.create({ nome, idade , cidade, uf, cep, complemento, bairro, numero, logradouro});
+    const novoUsuario = await Usuario.create({ nome, idade , cidade, uf, cep, complemento, bairro, numero, logradouro, email, senha:hashedPassword});
     res.status(201).json(novoUsuario);
   } catch (err) {
     console.log("Erro ao criar usuário");
@@ -101,4 +107,12 @@ exports.deleteusuario = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: 'Erro ao deletar usuário' });
   }
+};
+
+function getHashedPassword(senha) {
+  console.log('getHashedPassword', senha);
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(senha,salt);
+  console.log('getGashedPassword.hashedPassword:', hashedPassword);
+  return hashedPassword;
 };
