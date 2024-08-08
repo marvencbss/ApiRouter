@@ -17,7 +17,7 @@ exports.createusuario = async (req, res) => {
   console.log('createusuario.Logradouro'+ logradouro);
   console.log('createusuario.Email'+ email);
 
-const hashedPassword = getHashedPassword(senha);
+  const hashedPassword = getHashedPassword(senha);
 
   try {
     const novoUsuario = await Usuario.create({ nome, idade , cidade, uf, cep, complemento, bairro, numero, logradouro, email, senha:hashedPassword});
