@@ -46,7 +46,7 @@ const Usuario = database.define('usuario', {
     allowNull: true
   },
   email: {
-    type: STRING,
+    type: Sequelize.STRING,
     allowNull: true
   },
   senha: {

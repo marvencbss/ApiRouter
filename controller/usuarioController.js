@@ -1,4 +1,4 @@
-const Usuario = require('../modelo/Usuarioo');
+const Usuario = require('../modelo/Usuario');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -106,6 +106,35 @@ exports.deleteusuario = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ error: 'Erro ao deletar usuário' });
+  }
+};
+
+exports.login = async (req, res) => {
+
+  const { email, senha } = req.body;
+
+  console.log('login',email);
+  try {
+      const usuario = await Usuario.findOne({ where: { email } });
+      console.log('Usuario....:',usuario);
+      if (usuario===null) {
+          return res.status(400).send('Dados incorretos - cod 001!');
+      }
+      else{
+        console.log('Usuario.email econtrado:',usuario.email);
+        const isPasswordValid = bcrypt.compareSync(senha, usuario.senha);
+
+        if (!isPasswordValid) {
+            console.log('Dados incorretos - cod 002!');
+            return res.status(400).send('Dados incorretos!');
+        }
+        const token = jwt.sign({ usuarioId: usuario.id }, process.env.JWT_KEY, { expiresIn: '10m' });
+        res.send({ token });
+    }
+  } catch (err) {
+   
+    console.log('Erro no login',err);
+      res.status(400).send('Erro no login : ' + err.message);
   }
 };
 
