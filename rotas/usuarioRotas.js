@@ -33,6 +33,8 @@ const usuarioController = require('../controller/usuarioController');
  *                 type: string
  *               numero:
  *                 type: integer
+ *               logradouro:
+ *                 type: string
  *               email:
  *                 type: string
  *                 description: O email do usuário
