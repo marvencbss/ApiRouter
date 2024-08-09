@@ -2,6 +2,7 @@ const express = require('express');
 const sequelize = require('./data_base/db');
 const usuariosRotas = require('./rotas/usuarioRotas');
 const uploadArquivoRotas = require('./rotas/uploadArquivoRotas');
+const validarToken = require('./rotas/tokenRotas');
 
 const setupSwagger = require('./swagger');
 const cors = require('cors');
@@ -27,6 +28,7 @@ setupSwagger(app);
 app.use(express.json());
 app.use('/api_super', usuariosRotas);
 app.use('/api_super', uploadArquivoRotas);
+app.use('/api_super', validarToken);
 
 
 sequelize.sync().then(() => {
