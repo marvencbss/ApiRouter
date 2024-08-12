@@ -92,7 +92,7 @@ router.post('/enviarsmstelesing', enviarMensagemController.enviarSMSTTelesginSer
  *                 description: Destinatario que recebera o e-mail
  *               assunto:
  *                 type: string
- *                 description: Assunto do e-mail
+ *                 description: Assunto do email
  *               mensagem:
  *                 type: string
  *                 description: Mensagem do e-mail
