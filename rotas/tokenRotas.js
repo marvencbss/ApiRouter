@@ -68,4 +68,5 @@ const tokenController = require('../controller/tokenController');
  */
 router.post('/validarToken', tokenController.validaToken);
 
+//exporta as rotas criadas
 module.exports = router;
