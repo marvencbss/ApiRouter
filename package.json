@@ -25,6 +25,7 @@
     "sequelize": "^6.37.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "telesign": "^1.1.2",
     "telesignsdk": "^3.0.0",
     "twilio": "^5.2.2"
   }

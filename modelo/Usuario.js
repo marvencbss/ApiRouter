@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const database = require('../data_base/db');
-const sequelize = require('../data_base/db');
 
 const Usuario = database.define('usuario', {
   id: {
@@ -29,6 +28,10 @@ const Usuario = database.define('usuario', {
     type: Sequelize.STRING,
     allowNull: true
   },
+  logradouro: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   complemento: {
     type: Sequelize.STRING,
     allowNull: true
@@ -39,10 +42,6 @@ const Usuario = database.define('usuario', {
   },
   numero: {
     type: Sequelize.INTEGER,
-    allowNull: true
-  },
-  logradouro: {
-    type: Sequelize.STRING,
     allowNull: true
   },
   email: {
@@ -71,7 +70,5 @@ const Usuario = database.define('usuario', {
   }
 
 })
-
-
 
 module.exports = Usuario;
