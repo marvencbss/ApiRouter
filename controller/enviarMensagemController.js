@@ -1,4 +1,3 @@
-const { enviarSMSBytelesignService } = require('../service/enviarSMSService');
 const { enviarEmailService } = require('../service/enviarEmailService');
 
 exports.enviarEmail = async (req, res) => {
