@@ -4,7 +4,7 @@ const Usuario = require('../modelo/Usuario');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const EsqueciMinhaSenha = require('../modelo/esqueciMinhaSenha');
+const EsqueciMinhaSenha = require('../modelo/EsqueciMinhaSenha');
 
 exports.createusuario = async (req, res) => {
   console.log('createusuario');
@@ -236,5 +236,30 @@ exports.resetarSenha = async (req, res) => {
   } catch (err) {
     console.log('Erro ao resetar a senha',err);
     res.status(500).json({ error: 'Erro ao resetar a senha' });
+  }
+};
+
+
+exports.buscarUsuarioComEsqueciMinhaSenhaPorId = async (req, res) => {
+  const { usuarioId } = req.params;
+
+  try {
+    const usuario = await Usuario.findOne({
+      where: { id: usuarioId },
+      include: [
+        {
+          model: EsqueciMinhaSenha,
+        }
+      ]
+    });
+
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    res.status(200).json(usuario);
+  } catch (error) {
+    console.error('Erro ao buscar o usuário com EsqueciMinhaSenha:', error);
+    res.status(500).json({ message: 'Erro interno do servidor' });
   }
 };
